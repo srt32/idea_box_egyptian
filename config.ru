@@ -1,6 +1,6 @@
 require 'bundler'
 Bundler.require
 
-require './lib/app'
+require './app'
 
 run IdeaBoxApp

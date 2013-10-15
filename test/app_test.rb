@@ -15,4 +15,9 @@ class AppTest < Minitest::Test
     assert last_response.ok?
   end
 
+  def test_it_routes_to_root_post
+    post '/'
+    assert last_response.ok?
+  end
+
 end
