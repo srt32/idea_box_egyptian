@@ -1,4 +1,6 @@
 class IdeaBoxApp < Sinatra::Base
+  set :method_override, true
+
   require_relative './idea'
 
   configure :development do
@@ -17,6 +19,10 @@ class IdeaBoxApp < Sinatra::Base
     idea = Idea.new(params['idea_title'],params['idea_description'])
     idea.save
     redirect '/'
+  end
+
+  delete '/:id' do |id|
+    "DELETING an idea!"
   end
 
 end

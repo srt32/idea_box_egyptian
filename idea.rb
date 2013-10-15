@@ -24,8 +24,18 @@ class Idea
     end
   end
 
+  def self.delete(position)
+    database.transaction do
+      database['ideas'].delete_at(position)
+    end
+  end
+
   def self.database
-    @database ||= YAML::Store.new "ideabox"
+    unless ENV['RACK_ENV'] == 'test'
+      @database ||= YAML::Store.new "ideabox"
+    else
+      @database ||= YAML::Store.new "ideabox_test"
+    end
   end
 
   def database

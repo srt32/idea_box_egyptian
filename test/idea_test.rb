@@ -6,11 +6,30 @@ require_relative '../idea'
 class IdeaTest < Minitest::Test
   include Rack::Test::Methods
 
+  attr_reader :new_idea
+
+  def setup
+    delete_test_db
+    @new_idea = Idea.new("app", "social network for penguins")
+    @new_idea.save
+  end
+
+  def teardown
+    delete_test_db
+  end
+
+  def delete_test_db
+    File.delete('./ideabox_test') if File.exists?('./ideabox_test')
+  end
+
   def test_it_can_save_idea_to_db
-    new_idea = Idea.new("app", "social network for penguins")
-    new_idea.save
-    assert new_idea
     refute_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
+  end
+
+  def test_it_can_be_destroyed
+    Idea.delete(0)
+    assert_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
+    ##WHEN PASSING< WRITE A TEST ON APP< SAYING USER CAN go to DELETE at /:id
   end
 
 end
