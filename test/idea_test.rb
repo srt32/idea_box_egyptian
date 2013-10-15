@@ -31,4 +31,13 @@ class IdeaTest < Minitest::Test
     assert_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
   end
 
+  def test_it_can_be_updated
+    data = {
+      :idea_title => "app",
+      :idea_description => "new description penguins"
+    }
+    Idea.update(0,data)
+    assert_equal "new description penguins", (Idea.database.transaction {|db| db['ideas'][0]})[:idea_description]
+  end
+
 end

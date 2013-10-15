@@ -13,7 +13,7 @@ class AppTest < Minitest::Test
   def teardown
   end
 
-  def test_it_says_hello_world
+  def test_it_can_route_to_root_with_get
     get '/'
     assert last_response.ok?
   end
@@ -30,6 +30,11 @@ class AppTest < Minitest::Test
     delete '/0'
     assert last_response.redirect?, "route was not redirected"
     #assert this record doesn't exist anymore
+  end
+
+  def test_it_can_route_to_idea_it_put
+    put '/0', params={:idea_title => "updated title", :idea_description => "updated description"}
+    assert last_response.redirect?, "route was not redirected"
   end
 
 end

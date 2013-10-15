@@ -32,7 +32,6 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   put '/:id' do |id|
-    #NEEDS A TEST
     data = {
       :title => params['idea_title'],
       :description => params['idea_description']
