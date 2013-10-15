@@ -10,6 +10,7 @@ class IdeaTest < Minitest::Test
     new_idea = Idea.new("app", "social network for penguins")
     new_idea.save
     assert new_idea
+    refute_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
   end
 
 end
