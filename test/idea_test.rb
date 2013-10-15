@@ -29,7 +29,6 @@ class IdeaTest < Minitest::Test
   def test_it_can_be_destroyed
     Idea.delete(0)
     assert_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
-    ##WHEN PASSING< WRITE A TEST ON APP< SAYING USER CAN go to DELETE at /:id
   end
 
 end

@@ -22,7 +22,8 @@ class IdeaBoxApp < Sinatra::Base
   end
 
   delete '/:id' do |id|
-    "DELETING an idea!"
+    Idea.delete(id.to_i)
+    redirect '/'
   end
 
 end

@@ -25,4 +25,11 @@ class AppTest < Minitest::Test
     assert last_response.body.include?("yep"), "Index should include 'yep'"
   end
 
+  def test_it_can_delete_an_idea
+    #create an idea to be deleted
+    delete '/0'
+    assert last_response.redirect?, "route was not redirected"
+    #assert this record doesn't exist anymore
+  end
+
 end
