@@ -10,7 +10,7 @@ class IdeaTest < Minitest::Test
 
   def setup
     delete_test_db
-    @new_idea = Idea.new("app", "social network for penguins")
+    @new_idea = Idea.new(title: "app", description: "social network for penguins")
     @new_idea.save
   end
 
