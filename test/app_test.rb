@@ -26,7 +26,7 @@ class AppTest < Minitest::Test
   end
 
   def test_it_can_delete_an_idea
-    #create an idea to be deleted
+    post '/', params={:idea_title => "yep", :idea_description => "big idea"}
     delete '/0'
     assert last_response.redirect?, "route was not redirected"
     #assert this record doesn't exist anymore
