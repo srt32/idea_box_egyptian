@@ -17,7 +17,7 @@ class AppTest < Minitest::Test
 
   def test_it_routes_to_root_post
     post '/', params={:title => "yep", :idea_description => "big idea"}
-    assert last_response.ok?
+    assert last_response.redirect?
   end
 
   def test_it_lists_all_ideas_on_index
