@@ -11,6 +11,11 @@ class AppTest < Minitest::Test
   end
 
   def teardown
+    delete_test_db
+  end
+
+  def delete_test_db
+    File.delete('./ideabox_test') if File.exists?('./ideabox_test')
   end
 
   def test_it_can_route_to_root_with_get
@@ -33,6 +38,7 @@ class AppTest < Minitest::Test
   end
 
   def test_it_can_route_to_idea_it_put
+    post '/', params={:idea_title => "yep", :idea_description => "big idea"}
     put '/0', params={:idea_title => "updated title", :idea_description => "updated description"}
     assert last_response.redirect?, "route was not redirected"
   end
