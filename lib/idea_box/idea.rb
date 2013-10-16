@@ -1,4 +1,5 @@
 class Idea
+  include Comparable
 
   attr_reader :title, :description, :rank
 
@@ -14,6 +15,10 @@ class Idea
 
   def save
     IdeaStore.create(to_h)
+  end
+
+  def <=>(other)
+    other.rank <=> rank
   end
 
   def to_h
