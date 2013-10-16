@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 require_relative './test_helper'
 
-require_relative '../app'
+require_relative '../lib/app'
 
 class AppTest < Minitest::Test
   include Rack::Test::Methods

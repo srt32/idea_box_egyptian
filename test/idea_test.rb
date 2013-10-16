@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 require_relative './idea_test_helper'
 
-require_relative '../idea'
+require_relative '../lib/idea_box/idea'
 
 class IdeaTest < Minitest::Test
   include Rack::Test::Methods
