@@ -18,7 +18,7 @@ class IdeaStore
 
   def self.create(attributes)
     database.transaction do
-      database['ideas'] ||= []
+      database['ideas'] ||= [] # SHOULD BE ABLE TO REMOVE THIS LINE
       database['ideas'] << attributes
     end
   end
@@ -47,11 +47,17 @@ class IdeaStore
   end
 
   def self.database
+    return @database if @database
+
     unless ENV['RACK_ENV'] == 'test'
-      @database ||= YAML::Store.new "db/ideabox"
+      @database = YAML::Store.new "db/ideabox"
     else
-      @database ||= YAML::Store.new "ideabox_test"
+      @database = YAML::Store.new "ideabox_test"
     end
+    @database.transaction do
+      @database['ideas'] ||= []
+    end
+    @database
   end
 
 end
