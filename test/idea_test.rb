@@ -1,5 +1,5 @@
 ENV['RACK_ENV'] = 'test'
-require_relative './idea_test_helper'
+require_relative './helpers/idea_test_helper'
 
 require_relative '../lib/idea_box/idea'
 

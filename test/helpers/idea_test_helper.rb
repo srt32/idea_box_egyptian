@@ -7,4 +7,4 @@ require 'rack/test'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-require_relative '../lib/app'
+require_relative '../../lib/idea_box/idea'
