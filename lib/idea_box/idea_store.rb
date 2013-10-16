@@ -42,7 +42,7 @@ class IdeaStore
 
   def self.database
     unless ENV['RACK_ENV'] == 'test'
-      @database ||= YAML::Store.new "ideabox"
+      @database ||= YAML::Store.new "db/ideabox"
     else
       @database ||= YAML::Store.new "ideabox_test"
     end
