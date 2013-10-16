@@ -10,7 +10,7 @@ class IdeaTest < Minitest::Test
 
   def setup
     delete_test_db
-    @new_idea = IdeaStore.create(title: "app", description: "social network for penguins")
+    @new_idea = IdeaStore.create(title: "app", description: "social network for penguins", rank: "0")
   end
 
   def teardown
@@ -37,6 +37,13 @@ class IdeaTest < Minitest::Test
     }
     IdeaStore.update(0,data)
     assert_equal "new description penguins", (IdeaStore.database.transaction {|db| db['ideas'][0]})[:idea_description]
+  end
+
+  def test_it_can_be_liked
+    #CAN"T GET THIS GUY TO WORK
+    prior_rank = IdeaStore.find(0).rank
+    IdeaStore.find(0).like!
+    assert prior_rank+1, new_idea[rank].to_i
   end
 
 end

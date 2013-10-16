@@ -41,7 +41,6 @@ class IdeaBoxApp < Sinatra::Base
     idea.like!
     IdeaStore.update(id.to_i, idea.to_h)
     redirect '/'
-    # NEEDS A TEST
   end
 
 end
