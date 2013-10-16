@@ -40,10 +40,9 @@ class IdeaTest < Minitest::Test
   end
 
   def test_it_can_be_liked
-    #CAN"T GET THIS GUY TO WORK
-    prior_rank = IdeaStore.find(0).rank
-    IdeaStore.find(0).like!
-    assert prior_rank+1, new_idea[rank].to_i
+    prior_rank = IdeaStore.all.first.rank
+    IdeaStore.all.first.like!
+    assert prior_rank+1, IdeaStore.all.first.rank.to_i
   end
 
 end
