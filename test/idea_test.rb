@@ -10,8 +10,7 @@ class IdeaTest < Minitest::Test
 
   def setup
     delete_test_db
-    @new_idea = Idea.new(title: "app", description: "social network for penguins")
-    @new_idea.save
+    @new_idea = IdeaStore.create(title: "app", description: "social network for penguins")
   end
 
   def teardown
@@ -23,12 +22,12 @@ class IdeaTest < Minitest::Test
   end
 
   def test_it_can_save_idea_to_db
-    refute_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
+    refute_equal 0, (IdeaStore.database.transaction {|db| db['ideas']}.length)
   end
 
   def test_it_can_be_destroyed
-    Idea.delete(0)
-    assert_equal 0, (Idea.database.transaction {|db| db['ideas']}.length)
+    IdeaStore.delete(0)
+    assert_equal 0, (IdeaStore.database.transaction {|db| db['ideas']}.length)
   end
 
   def test_it_can_be_updated
@@ -36,8 +35,8 @@ class IdeaTest < Minitest::Test
       :idea_title => "app",
       :idea_description => "new description penguins"
     }
-    Idea.update(0,data)
-    assert_equal "new description penguins", (Idea.database.transaction {|db| db['ideas'][0]})[:idea_description]
+    IdeaStore.update(0,data)
+    assert_equal "new description penguins", (IdeaStore.database.transaction {|db| db['ideas'][0]})[:idea_description]
   end
 
 end
