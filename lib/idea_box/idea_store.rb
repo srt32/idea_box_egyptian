@@ -3,10 +3,14 @@ class IdeaStore
   require 'yaml/store'
 
   def self.all
+    raw_ideas.map do |data|
+      Idea.new(data)
+    end
+  end
+
+  def self.raw_ideas
     database.transaction do |db|
       db['ideas'] || []
-    end.map do |data|
-      Idea.new(data)
     end
   end
 
