@@ -47,4 +47,9 @@ class AppTest < Minitest::Test
     assert last_response.redirect?, "route was not redirected"
   end
 
+  def test_it_can_route_to_rank_with_post
+    post_an_idea
+    post '/0/like'
+    assert last_response.redirect?, "route was not redirected"
+  end
 end
