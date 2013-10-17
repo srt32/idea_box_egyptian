@@ -1,3 +1,4 @@
+require 'sinatra/base'
 require 'idea_box'
 
 class IdeaBoxApp < Sinatra::Base
