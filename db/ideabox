@@ -2,3 +2,25 @@
 ideas:
 - title: '444'
   description: '333'
+  rank: 3
+- title: '123'
+  description: '456'
+- user_id: '4'
+  title: title_for_4
+  description: desc_for_4
+- user_id: '3'
+  title: boom_3
+  description: desc_3
+users:
+- !ruby/object:User
+  email: 
+  id: 1
+- !ruby/object:User
+  email: 
+  id: 2
+- !ruby/object:User
+  email: me
+  id: 3
+- !ruby/object:User
+  email: nomis@example.com
+  id: 4

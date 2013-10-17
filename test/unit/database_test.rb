@@ -1,4 +1,4 @@
-require_relative './helpers/database_test_helper'
+require_relative '../helpers/database_test_helper'
 
 class DatabaseTest < Minitest::Test
 

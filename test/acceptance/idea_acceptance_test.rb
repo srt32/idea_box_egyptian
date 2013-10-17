@@ -23,14 +23,6 @@ class IdeaAcceptanceTest < Minitest::Test
     assert_equal 200, page.status_code
   end
 
-  def test_it_can_add_an_idea
-    visit '/'
-    fill_in('idea[title]', :with => "Yeah!")
-    fill_in('idea[description]', :with => "booyah idea")
-    click_button('submit_button')
-    assert page.has_content?('Yeah!')
-  end
-
   def test_it_can_edit_an_idea
     visit '/'
     click_link('Edit')

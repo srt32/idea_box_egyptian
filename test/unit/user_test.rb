@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
-require_relative './helpers/user_test_helper'
+require_relative '../helpers/user_test_helper'
 
-require_relative '../lib/idea_box/user'
+require_relative '../../lib/idea_box/user'
 
 class UserTest < Minitest::Test
 
@@ -35,6 +35,12 @@ class UserTest < Minitest::Test
 
   def test_it_responds_to_id_from_user_object
     assert_equal 1, user.id
+  end
+
+  def test_it_can_find_a_user
+    first_user = UserStore.find(1)
+    assert_equal "simon@example.com", first_user.email
+    assert_equal 1, first_user.id
   end
 
   def test_it_can_find_largest_id

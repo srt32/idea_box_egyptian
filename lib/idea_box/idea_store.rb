@@ -36,10 +36,13 @@ class IdeaStore
   def self.update(id, data)
     old_idea = find(id)
     new_idea = old_idea.to_h.merge(data)
-    #binding.pry
     database.transaction do
       database['ideas'][id] = new_idea
     end
+  end
+
+  def self.find_all_by_user_id(user_id)
+    all.select{|idea| idea.user_id == user_id}
   end
 
   def self.find(id)
@@ -55,17 +58,6 @@ class IdeaStore
 
   def self.database
     Database.connect
-     #return @database if @database
-
-    #unless ENV['RACK_ENV'] == 'test'
-    #  @database = YAML::Store.new "db/ideabox"
-    #else
-    #  @database = YAML::Store.new "ideabox_test"
-    #end
-    #@database.transaction do
-    #  @database['ideas'] ||= []
-    #end
-    #@database
   end
 
 end

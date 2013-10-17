@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
-require_relative './helpers/idea_test_helper'
+require_relative '../helpers/idea_test_helper'
 
-require_relative '../lib/idea_box/idea'
+require_relative '../../lib/idea_box/idea'
 
 class IdeaTest < Minitest::Test
   include Rack::Test::Methods
@@ -10,7 +10,10 @@ class IdeaTest < Minitest::Test
 
   def setup
     delete_test_db
-    @new_idea = IdeaStore.create("title" => "app", "description" => "social network for penguins", "rank" => "3")
+    @new_idea = IdeaStore.create("title" => "app",
+                                 "description" => "social network for penguins",
+                                 "rank" => "3",
+                                 "user_id" => 1)
   end
 
   def teardown
@@ -38,6 +41,7 @@ class IdeaTest < Minitest::Test
     IdeaStore.update(0,data)
     assert_equal "new description penguins", (IdeaStore.database.transaction {|db| db['ideas'][0]})["description"]
     assert_equal "3", (IdeaStore.database.transaction {|db| db['ideas'][0]})["rank"]
+    assert_equal 1, (IdeaStore.database.transaction {|db| db['ideas'][0]})["user_id"]
   end
 
   def test_it_can_be_liked
