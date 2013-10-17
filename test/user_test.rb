@@ -4,7 +4,6 @@ require_relative './helpers/user_test_helper'
 require_relative '../lib/idea_box/user'
 
 class UserTest < Minitest::Test
-  include Rack::Test::Methods
 
   attr_reader :user, :new_user
 
@@ -63,7 +62,9 @@ class UserTest < Minitest::Test
   end
 
   def test_it_can_be_updated
-
+    new_data = {"email" => "simonsays@example.com"}
+    UserStore.update(0,new_data)
+    assert_equal "simonsays@example.com", UserStore.all.first.email
   end
 
 end

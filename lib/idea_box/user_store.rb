@@ -37,6 +37,16 @@ class UserStore
     end
   end
 
+  def self.update(id,data)
+    old_data = database.transaction do
+      database['users'].select{|user| user.id = id}
+    end
+    new_data = old_data.first.to_h.merge(data)
+    database.transaction do
+      database['users'].select{|user| user.id = id}.first.email = new_data["email"]
+    end
+  end
+
   def self.database
     Database.connect
   end

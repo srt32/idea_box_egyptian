@@ -1,6 +1,6 @@
 class User
 
-  attr_reader :email, :id
+  attr_accessor :email, :id # thd :id accessor is very bad
 
   def initialize(input)
     @email = input["email"]
@@ -13,6 +13,12 @@ class User
     else
       return 1
     end
+  end
+
+  def to_h
+    {"id" => id,
+      "email" => email
+    }
   end
 
 end
