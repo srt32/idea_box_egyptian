@@ -55,7 +55,7 @@ class IdeaStore
 
   def self.database
     Database.connect
-    #return @database if @database
+     #return @database if @database
 
     #unless ENV['RACK_ENV'] == 'test'
     #  @database = YAML::Store.new "db/ideabox"

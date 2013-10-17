@@ -12,6 +12,7 @@ module Database
     end
     @@database.transaction do
       @@database['ideas'] ||= []
+      @@database['users'] ||= [] # these guys do nothing...
     end
     @@database
   end
