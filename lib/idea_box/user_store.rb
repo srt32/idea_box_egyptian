@@ -31,6 +31,12 @@ class UserStore
     end
   end
 
+  def self.delete(id)
+    database.transaction do
+      database['users'].delete_if{|user| user.id == id}
+    end
+  end
+
   def self.database
     Database.connect
   end

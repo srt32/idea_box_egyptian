@@ -53,7 +53,13 @@ class UserTest < Minitest::Test
   end
 
   def test_it_can_be_destroyed
-    #assert false
+    second_user = User.new("email" => "gary@example.com")
+    UserStore.create(second_user)
+    third_user = User.new("email" => "busse@example.com")
+    UserStore.create(third_user)
+    assert_equal 3, UserStore.all.count
+    UserStore.delete(2)
+    assert_equal [1,3], UserStore.all.map(&:id)
   end
 
   def test_it_can_be_updated
