@@ -6,11 +6,12 @@ require_relative '../lib/idea_box/user'
 class UserTest < Minitest::Test
   include Rack::Test::Methods
 
-  attr_reader :new_user
+  attr_reader :user, :new_user
 
   def setup
     delete_test_db
-    @new_user = UserStore.create("email" => "simon@example.com")
+    @user = User.new("email" => "simon@example.com")
+    @new_user = UserStore.create(user)
   end
 
   def teardown
@@ -25,19 +26,34 @@ class UserTest < Minitest::Test
     refute_equal 0, (UserStore.database.transaction {|db| db['users']}.length)
   end
 
-  # feels like UserStore should create users but delegate setting an id to user
-  # maybe pass UserStore.create a User object instead of a hash
-  # in that way, the user class can validate email and serialize an id
-  def test_it_responds_to_email
-    
+  def test_it_responds_to_email_from_user_object
+    assert_equal "simon@example.com", user.email
   end
 
-  def test_it_responds_to_id
+  def test_it_responds_to_email_from_db
+    assert_equal "simon@example.com", UserStore.all.first.email
+  end
 
+  def test_it_responds_to_id_from_user_object
+    assert_equal 1, user.id
+  end
+
+  def test_it_can_find_largest_id
+    assert_equal 1, UserStore.max_id
+    second_user = User.new("email" => "simon@example.com")
+    UserStore.create(second_user)
+    assert_equal 2, UserStore.max_id
+  end
+
+  def test_it_responds_to_id_from_db
+    assert_equal 1, UserStore.all.first.id
+    second_user = User.new("email" => "simon@example.com")
+    UserStore.create(second_user)
+    assert_equal 2, UserStore.all[1].id
   end
 
   def test_it_can_be_destroyed
-
+    #assert false
   end
 
   def test_it_can_be_updated
