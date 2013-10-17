@@ -18,7 +18,6 @@ class AcceptanceTest < Minitest::Test
     File.delete('./ideabox_test') if File.exists?('./ideabox_test')
   end
 
-
   def test_it_doesnt_break
     visit '/'
     assert_equal 200, page.status_code
@@ -34,22 +33,24 @@ class AcceptanceTest < Minitest::Test
 
   def test_it_can_edit_an_idea
     visit '/'
-    # press edit button for an idea
-    # fill in form
-    # submit form
-
+    click_link('Edit')
+    fill_in('idea[title]', :with => "NOPE")
+    click_button('submit_button')
+    assert page.has_content?('NOPE')
   end
 
   def test_it_can_delete_an_idea
     visit '/'
-    #press delete on an idea
-
+    assert page.has_content?('penguin')
+    click_button('delete')
+    refute page.has_content?('penguin')
   end
 
   def test_it_can_add_to_rank
     visit '/'
-    # press plus on an idea
-
+    assert page.has_content?("3")
+    click_button('+')
+    assert page.has_content?("4")
   end
 
 end

@@ -8,7 +8,7 @@
       <%= idea.description %>
       <%= idea.rank %>
       <form action='/<%= idea.id %>/like' method='POST' style="display: inline">
-        <input type='submit' value="+" />
+        <input type='submit' id='rank_button' value="+" />
       </form>
       <a href="/<%= idea.id %>/edit">Edit</a>
       <form action="/<%= idea.id %>" method="POST">
