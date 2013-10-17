@@ -10,7 +10,7 @@ class IdeaTest < Minitest::Test
 
   def setup
     delete_test_db
-    @new_idea = IdeaStore.create(title: "app", description: "social network for penguins", rank: "0")
+    @new_idea = IdeaStore.create("title" => "app", "description" => "social network for penguins", "rank" => "3")
   end
 
   def teardown
@@ -32,17 +32,18 @@ class IdeaTest < Minitest::Test
 
   def test_it_can_be_updated
     data = {
-      :idea_title => "app",
-      :idea_description => "new description penguins"
+      "title" => "app",
+      "description" => "new description penguins"
     }
     IdeaStore.update(0,data)
-    assert_equal "new description penguins", (IdeaStore.database.transaction {|db| db['ideas'][0]})[:idea_description]
+    assert_equal "new description penguins", (IdeaStore.database.transaction {|db| db['ideas'][0]})["description"]
+    assert_equal "3", (IdeaStore.database.transaction {|db| db['ideas'][0]})["rank"]
   end
 
   def test_it_can_be_liked
     prior_rank = IdeaStore.all.first.rank
     IdeaStore.all.first.like!
-    assert prior_rank+1, IdeaStore.all.first.rank.to_i
+    assert prior_rank.to_i + 1, IdeaStore.all.first.rank.to_i
   end
 
 end

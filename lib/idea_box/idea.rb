@@ -11,7 +11,7 @@ class Idea
   end
 
   def like!
-    @rank += 1
+    @rank = @rank.to_i + 1
   end
 
   def save
@@ -27,7 +27,6 @@ class Idea
       "title" => title,
       "description" => description,
       "rank" => rank
-      # MAYBE NEED TO ADD ID in here?
     }
   end
 

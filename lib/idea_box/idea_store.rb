@@ -1,5 +1,7 @@
 require_relative './database.rb'
 require 'yaml/store'
+require 'pry'
+
 
 class IdeaStore
   extend Database
@@ -32,8 +34,11 @@ class IdeaStore
   end
 
   def self.update(id, data)
+    old_idea = find(id)
+    new_idea = old_idea.to_h.merge(data)
+    #binding.pry
     database.transaction do
-      database['ideas'][id] = data
+      database['ideas'][id] = new_idea
     end
   end
 
