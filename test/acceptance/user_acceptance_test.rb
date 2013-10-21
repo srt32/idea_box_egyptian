@@ -50,4 +50,10 @@ class UserAcceptanceTest < Minitest::Test
     assert page.has_content?("User 1's first big idea's description"), "page should display idea desc"
   end
 
+  def test_user_index_has_button_to_user_show
+    visit '/users'
+    first('.user_see_more').click_link('See more')
+    assert page.has_content?("simon@example.com")
+  end
+
 end
